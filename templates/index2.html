@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clasificador de Ropa</title>
+</head>
+<body>
+    <h1>Clasificador de Ropa</h1>
+    
+    <form action="/predict" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" accept="image/*" required>
+        <button type="submit">Predecir</button>
+    </form>
+
+    <!-- Mostrar resultado -->
+    {% if result_label %}
+    <h2>Resultado: {{ result_label }}</h2>
+    {% endif %}
+
+    <!-- Mostrar imagen con predicción -->
+    {% if plot_img %}
+    <img src="data:image/png;base64,{{ plot_img }}" alt="Predicción">
+    {% endif %}
+</body>
+</html>
