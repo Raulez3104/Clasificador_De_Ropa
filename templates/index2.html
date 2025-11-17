@@ -4,23 +4,93 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clasificador de Ropa</title>
+
+    <style>
+       
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            color: #333;
+        }
+
+       
+        .title {
+            margin-top: 40px;
+            font-size: 2.5rem;
+            color: #2c3e50;
+        }
+
+       
+        .form-container {
+            margin-top: 30px;
+            background: white;
+            padding: 25px;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+            border-radius: 12px;
+            box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
+        }
+
+        
+        .file-input {
+            margin-bottom: 20px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+       
+        .btn {
+            padding: 10px 25px;
+            background: #3498db;
+            color: white;
+            border: none;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn:hover {
+            background: #2980b9;
+        }
+
+       
+        .result-text {
+            margin-top: 20px;
+            font-size: 1.6rem;
+            color: #27ae60;
+        }
+
+        
+        .result-img {
+            margin-top: 20px;
+            max-width: 350px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.15);
+        }
+    </style>
+
 </head>
 <body>
-    <h1>Clasificador de Ropa</h1>
-    
-    <form action="/predict" method="post" enctype="multipart/form-data">
-        <input type="file" name="file" accept="image/*" required>
-        <button type="submit">Predecir</button>
+
+    <h1 class="title">Clasificador de Ropa</h1>
+
+    <form class="form-container" action="/predict" method="post" enctype="multipart/form-data">
+        <input class="file-input" type="file" name="file" accept="image/*" required>
+        <button class="btn" type="submit">Predecir</button>
     </form>
 
-    <!-- Mostrar resultado -->
     {% if result_label %}
-    <h2>Resultado: {{ result_label }}</h2>
+    <h2 class="result-text">Resultado: {{ result_label }}</h2>
     {% endif %}
 
-    <!-- Mostrar imagen con predicción -->
     {% if plot_img %}
-    <img src="data:image/png;base64,{{ plot_img }}" alt="Predicción">
+    <img class="result-img" src="data:image/png;base64,{{ plot_img }}" alt="Predicción">
     {% endif %}
+
 </body>
 </html>

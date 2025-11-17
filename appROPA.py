@@ -2,7 +2,7 @@ from flask import Flask, render_template, request
 import cv2 as cv
 import numpy as np
 import matplotlib
-matplotlib.use('Agg')  # Backend sin interfaz gráfica para servidor
+matplotlib.use('Agg')  
 import matplotlib.pyplot as plt
 from keras.models import load_model
 import os
@@ -12,7 +12,7 @@ modelo_guardado = load_model('./models/modelo.h5')
 nombres_de_clasificaciones = ['Polera', 'Pantalon', 'Pullover', 'Vestido', 'Abrigo', 
                                'Sandalia', 'Camisa', 'Zapatilla', 'Cartera', 'Bota']
 
-# Crear carpeta static si no existe
+
 if not os.path.exists('static'):
     os.makedirs('static')
 
@@ -64,35 +64,35 @@ def index():
 def predict():
     file = request.files['file']
     if file:
-        # Leer la imagen desde el archivo subido
+        
         img_bytes = np.frombuffer(file.read(), np.uint8)
         img = cv.imdecode(img_bytes, cv.IMREAD_COLOR)
         
-        # Realizar predicción
+        
         predictions, resultado = predict_image(img)
         result_label = nombres_de_clasificaciones[resultado]
         
-        # Crear gráficos
+       
         plt.figure(figsize=(12, 6))
         
-        # Gráfico de la imagen
+       
         plt.subplot(1, 2, 1)
         plot_image(predictions, resultado, pixel(img))
         
-        # Gráfico de barras con predicciones
+       
         plt.subplot(1, 2, 2)
         plot_value_array(predictions, resultado)
         
         plt.tight_layout()
         
-        # Guardar la imagen en la carpeta static (ruta absoluta para evitar errores)
+        
         static_path = os.path.join(os.path.dirname(__file__), 'static', 'predicted_image.png')
         plt.savefig(static_path, bbox_inches='tight', dpi=100)
         plt.close()
         
-        print(f"Imagen guardada en: {static_path}")  # Para debug
+        print(f"Imagen guardada en: {static_path}")  
         
-        # Renderizar página de resultados
+      
         return render_template('resultado.html', result_label=result_label)
     
     return render_template('resultado.html', result_label='Error: No se recibió ningún archivo')

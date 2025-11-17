@@ -4,11 +4,70 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clasificar ropas</title>
+
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #eef2f5;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            color: #444;
+        }
+
+       
+        .title {
+            margin-top: 40px;
+            color: #2c3e50;
+            font-size: 2.2rem;
+        }
+
+        
+        .back-btn {
+            display: inline-block;
+            margin-top: 10px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            padding: 10px 20px;
+            background: #3498db;
+            color: white;
+            border-radius: 8px;
+            transition: 0.2s;
+        }
+
+        .back-btn:hover {
+            background: #2980b9;
+        }
+
+       
+        .result-label {
+            margin-top: 25px;
+            font-size: 1.3rem;
+        }
+
+      
+        .result-img {
+            margin-top: 30px;
+            max-width: 90%;
+            border-radius: 12px;
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+        }
+    </style>
+
 </head>
 <body>
-    <h1>Result</h1>
-    <a href="/">Upload another image</a>
-    <p>The predicted label for the upload image is: {{result_label}}</p>
-    <img src="{{url_for('static', filename='predicted_image.png')}}" alt="Predicted Image" style="max-width: 100%;">
+
+    <h1 class="title">Result</h1>
+
+    <a class="back-btn" href="/">Upload another image</a>
+
+    <p class="result-label">
+        The predicted label for the upload image is: {{ result_label }}
+    </p>
+
+    <img class="result-img" 
+         src="{{ url_for('static', filename='predicted_image.png') }}" 
+         alt="Predicted Image">
+
 </body>
 </html>
